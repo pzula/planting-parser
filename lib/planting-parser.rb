@@ -1,4 +1,5 @@
 require 'csv'
+require 'time'
 require_relative 'planting-parser/parser'
 
 module PlantingParser
