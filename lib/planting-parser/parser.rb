@@ -3,7 +3,7 @@ module PlantingParser
 
     def parse_file(filename)
       rows = open_file(filename)
-      #@events = rows.collect {|row| calendar_builder(row) }
+     # events = rows.collect {|row| calendar_builder(row) }
     end
 
     def open_file(filename)
@@ -16,14 +16,23 @@ module PlantingParser
       end
     end
 
-    #def calendar_title(title)
+    def calendar_title(title)
 
-    #end
+    end
 
-    #def calendar_builder(data)
-      ### check if it is direct seed, start, or transplant
+    def calendar_builder(data)
+     # action = actions([data[:direct_seed], data[:start], data[:transplant]])
+      #calendar_title( )
+    end
 
-      #calendar_title(data[])
-    #end
+    def actions(headers)
+      if !headers[0].nil?
+        return 'Direct Seed'
+      elsif !headers[1].nil?
+        return 'Start'
+      elsif !headers[2].nil?
+        return 'Transplant'
+      end
+    end
   end
 end
