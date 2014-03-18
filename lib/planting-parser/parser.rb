@@ -16,21 +16,30 @@ module PlantingParser
       end
     end
 
-    def calendar_title(title)
+    def calendar_title(direct_seed, start, number_starts, transplant, number_plants, variety, crop)
+      action = actions(direct_seed, start, transplant)
+      if action == 'Transplant' || action == 'Direct Seed'
+        number = number_plants
+      else
+        number = number_starts
+      end
+      variety = variety
+      crop = crop
 
+      return "#{action} #{number} #{variety} #{crop}"
     end
 
     def calendar_builder(data)
-     # action = actions([data[:direct_seed], data[:start], data[:transplant]])
-      #calendar_title( )
+      #
+     # action =       #calendar_title( )
     end
 
-    def actions(headers)
-      if !headers[0].nil?
+    def actions(direct_seed, start, transplant)
+      if !direct_seed.nil?
         return 'Direct Seed'
-      elsif !headers[1].nil?
+      elsif !start.nil?
         return 'Start'
-      elsif !headers[2].nil?
+      elsif !transplant.nil?
         return 'Transplant'
       end
     end

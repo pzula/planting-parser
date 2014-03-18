@@ -16,15 +16,19 @@ describe PlantingParser::Parser do
     parser = PlantingParser::Parser.new
     parsed_row = parser.parse_file('./test/fixtures/FakerSchedule_2014.csv').first
 
-    headers = [parsed_row[:direct_seed], parsed_row[:start], parsed_row[:transplant]]
-
-    parser.actions(headers).must_equal('Start')
+    parser.actions(parsed_row[:direct_seed], parsed_row[:start], parsed_row[:transplant]).must_equal('Start')
   end
 
   it('forms the correct calendar item title') do
-    skip
     parser = PlantingParser::Parser.new
-    item = parser.parse_file('./test/fixtures/FakerSchedule_2014.csv').first
-    item.calendar_title.must_equal('Start DiCicco Broccoli')
+    parsed_row = parser.parse_file('./test/fixtures/FakerSchedule_2014.csv').first
+    title = parser.calendar_title(parsed_row[:direct_seed],
+                                  parsed_row[:start],
+                                  parsed_row[:_starts],
+                                  parsed_row[:transplant],
+                                  parsed_row[:_plants],
+                                  parsed_row[:variety],
+                                  parsed_row[:crop])
+    title.must_equal('Start 20 Di Cicco Broccoli')
   end
 end
