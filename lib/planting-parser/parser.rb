@@ -30,8 +30,7 @@ module PlantingParser
     end
 
     def calendar_builder(data)
-      #
-     # action =       #calendar_title( )
+      CalendarEvent.new(title, date)
     end
 
     def actions(direct_seed, start, transplant)
