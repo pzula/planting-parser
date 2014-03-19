@@ -46,8 +46,8 @@ describe PlantingParser::Parser do
   end
 
   it('creates a new CalendarEvent from each row') do
-    skip
     parser = PlantingParser::Parser.new
     built_file = parser.parse_file('./test/fixtures/FakerSchedule_2014.csv')
+    (built_file.count).must_equal(49)
   end
 end
