@@ -5,6 +5,6 @@ describe PlantingParser::CalendarEvent do
     title = 'Start 20 Di Cicco Broccoli'
     date = '2/17-2/19'
 
-    CalendarBuilder.new(title, date).must_equal("Successfully posted to Google")
+    CalendarEvent.new(title, date).must_equal("Successfully posted to Google")
   end
 end
