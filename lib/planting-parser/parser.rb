@@ -3,7 +3,8 @@ module PlantingParser
 
     def parse_file(filename)
       rows = open_file(filename)
-     # events = rows.collect {|row| calendar_builder(row) }
+      event = rows.collect {|row| calendar_builder(row) }
+      puts event
     end
 
     def open_file(filename)
@@ -30,7 +31,17 @@ module PlantingParser
     end
 
     def calendar_builder(data)
-      CalendarEvent.new(title, date)
+      title = calendar_title(data[:direct_seed],
+                             data[:start],
+                             data[:_starts],
+                             data[:transplant],
+                             data[:_plants],
+                             data[:variety],
+                             data[:crop])
+      date = date_splitter(data[:date])
+      start_date = date[0]
+      end_date = date[1]
+      Event.new(title, start_date, end_date)
     end
 
     def actions(direct_seed, start, transplant)
