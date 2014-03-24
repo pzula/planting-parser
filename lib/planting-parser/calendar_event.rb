@@ -15,11 +15,13 @@ module PlantingParser
                            :app_name => ENV['GCAL_APPNAME'])
     end
 
-    def post(title, start_time, end_time)
+    def post(title, start_date, end_date)
       event = cal.create_event do |e|
         e.title = title
-        e.start_time = start_time
-        e.end_time = end_time
+        e.start_time = start_date
+        if end_date
+          e.end_time = end_date
+        end
       end
       puts event
     end
