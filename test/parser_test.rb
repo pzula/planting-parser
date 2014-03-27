@@ -17,6 +17,7 @@ describe PlantingParser::Parser do
   end
 
   it('parses a data file') do
+    skip
     PlantingParser::Parser.new.parse_file('./test/fixtures/FakerSchedule_2014.csv').count.must_equal(49)
   end
 
@@ -25,6 +26,13 @@ describe PlantingParser::Parser do
     parser = PlantingParser::Parser.new
 
     parser.date_splitter(dates).must_equal([Time.parse('2/17'), Time.parse('2/19')])
+  end
+
+  it('returns an empty string for a nil date') do
+    dates = nil
+    parser = PlantingParser::Parser.new
+
+    parser.date_splitter(dates).must_equal("")
   end
 
   it('builds the right actions from the headers') do
@@ -43,11 +51,5 @@ describe PlantingParser::Parser do
                                   @parsed_row[:variety],
                                   @parsed_row[:crop])
     title.must_equal('Start 20 Di Cicco Broccoli')
-  end
-
-  it('creates a new CalendarEvent from each row') do
-    parser = PlantingParser::Parser.new
-    built_file = parser.parse_file('./test/fixtures/FakerSchedule_2014.csv')
-    (built_file.count).must_equal(49)
   end
 end

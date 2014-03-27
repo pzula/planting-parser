@@ -12,6 +12,7 @@ module PlantingParser
     end
 
     def date_splitter(dates)
+      return "" unless !dates.nil?
       dates.split('-').map do |date|
         Time.parse(date)
       end
