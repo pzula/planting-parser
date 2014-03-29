@@ -4,7 +4,7 @@ describe PlantingParser::Parser do
   def setup
     @parsed_row = {
                   :date =>'2/1',
-                  :alt_dates => nil,
+                  :alt_dates => '2/5',
                   :crop =>  "Broccoli",
                   :location => nil,
                   :direct_seed => nil,
@@ -51,5 +51,10 @@ describe PlantingParser::Parser do
                                   @parsed_row[:variety],
                                   @parsed_row[:crop])
     title.must_equal('Start 20 Di Cicco Broccoli')
+  end
+
+  it('builds a proper event if alt_dates are present') do
+    parser = PlantingParser::Parser.new
+    parser.calendar_builder(@parsed_row)
   end
 end

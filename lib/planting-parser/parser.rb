@@ -39,11 +39,14 @@ module PlantingParser
                              data[:_plants],
                              data[:variety],
                              data[:crop])
-      date = date_splitter(data[:date])
-      start_date = date[0]
-      end_date = date[1]
+      orig_dates = date_splitter(data[:date])
+      alt_dates = date_splitter(data[:alt_dates])
       event = Event.new
-      event.post(title, start_date, end_date)
+      event.post(title, orig_dates)
+      if !alt_dates.to_s.empty?
+        event = Event.new
+        event.post(title, alt_dates)
+      end
     end
 
     def actions(direct_seed, start, transplant)
